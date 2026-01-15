@@ -1,5 +1,5 @@
 {
-  "name": "ed-app",
+  "name": "exc-app",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -8,6 +8,10 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
   },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "devDependencies": {
     "prettier": "^3.7.4",
     "turbo": "^2.7.4",
