@@ -1,7 +1,7 @@
 
 import {Request,Response,NextFunction} from 'express';
 import jwt from 'jsonwebtoken';
-import { JWT_SECRET } from './config';
+import { JWT_SECRET } from '@repo/backend-common';
 
 declare global {
   namespace Express {

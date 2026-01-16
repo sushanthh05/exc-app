@@ -6,6 +6,19 @@ import {CreateUserSchema,SigninSchema,CreateRoomSchema} from "@repo/common/types
 const app = express();
 const PORT = 3001;
 
+
+
+app.post("/signup", (req, res) => {
+     const data=CreateUserSchema.safeParse(req.body);
+     if(!data.success){
+          res.json({
+               message:"Incorrect data",
+          })
+          return;
+     }
+     res.json({userId:"123"})
+});
+
 app.post("/signin", (req, res) => {
     const data=SigninSchema.safeParse(req.body);
      if(!data.success){
@@ -20,16 +33,7 @@ app.post("/signin", (req, res) => {
     res.json({token});
 });
 
-app.post("/signup", (req, res) => {
-     const data=CreateUserSchema.safeParse(req.body);
-     if(!data.success){
-          res.json({
-               message:"Incorrect data",
-          })
-          return;
-     }
-     res.json({userId:"123"})
-});
+
 
 app.post("/room",middleware,(req, res) => {
      const data=CreateRoomSchema.safeParse(req.body);
