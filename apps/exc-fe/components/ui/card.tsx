@@ -2,14 +2,23 @@ import * as React from "react";
 
 const Card = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className = "", ...props }, ref) => (
-  <div
-    ref={ref}
-    className={`rounded-lg border bg-card text-card-foreground shadow-sm ${className}`}
-    {...props}
-  />
-));
+  React.HTMLAttributes<HTMLDivElement> & { variant?: "default" | "glass" | "glow" | "gradient" }
+>(({ className = "", variant = "default", ...props }, ref) => {
+  const variants = {
+    default: "bg-zinc-900/80 border-zinc-800 hover:border-zinc-700",
+    glass: "glass hover:border-zinc-600/50",
+    glow: "bg-zinc-900/90 border-purple-500/20 hover:border-purple-500/40 shadow-[0_0_30px_rgba(168,85,247,0.1)] hover:shadow-[0_0_40px_rgba(168,85,247,0.2)]",
+    gradient: "bg-gradient-to-br from-zinc-900 via-zinc-900 to-purple-900/20 border-zinc-800 hover:border-purple-500/30",
+  };
+
+  return (
+    <div
+      ref={ref}
+      className={`rounded-2xl border backdrop-blur-sm transition-all duration-500 ${variants[variant]} ${className}`}
+      {...props}
+    />
+  );
+});
 Card.displayName = "Card";
 
 const CardHeader = React.forwardRef<
@@ -30,7 +39,7 @@ const CardTitle = React.forwardRef<
 >(({ className = "", ...props }, ref) => (
   <h3
     ref={ref}
-    className={`text-2xl font-semibold leading-none tracking-tight ${className}`}
+    className={`text-2xl font-semibold leading-none tracking-tight text-zinc-100 ${className}`}
     {...props}
   />
 ));
@@ -42,7 +51,7 @@ const CardDescription = React.forwardRef<
 >(({ className = "", ...props }, ref) => (
   <p
     ref={ref}
-    className={`text-sm text-muted-foreground ${className}`}
+    className={`text-sm text-zinc-400 ${className}`}
     {...props}
   />
 ));
